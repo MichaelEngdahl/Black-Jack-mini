@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+		*{margin:0;padding:0%}
+		figure{display:inline-block;margin:7px;}
+		</style>
+</head>
+<body>
+	<button onclick=me()>Nytt kort</button> 
+	<button onclick=computer()>dator</button>   
+	<button onclick=location.reload()>Nytt spel </button>
+	<label>Resultat </label>
+	<div></div>
+	<script>
+		var ess=0;
+		var dess=0;
+		var poäng=0;
+		var datorpoäng=0;
+		var cards=Array.from(new Array(52),(x,i)=>i+1)
+		var b=cards.sort((a,b)=>0.5-Math.random());
+		var points=[0,0,2,3,4,5,6,7,8,9,10,10,10,10,11]
+		//function func()
+		//{
+		//	return 0.5-Math.random()
+		//}
+		console.log(cards);
+		function me() {
+			var card=cards.shift()
+			console.log(card);
+			var value=14-Math.floor((card-1)/4)
+		
+			point=points[value];
+			if(point==11) ess++;
+			poäng+=point;
+			if(poäng>21 && ess>0) {
+				poäng-=10;
+				ess--;
+			}
+			if(poäng==21)
+			alert("Du vann")
+			if(poäng>21)
+			alert("Datorn vann");
+			// console.log(card,value,point)
+			showCard(card,point)
+		}
+
+		function computer() {
+	
+			document.querySelector("div").innerHTML+="<hr />"
+			while(datorpoäng<poäng) {
+				var card=cards.shift()
+				var value=14-Math.floor((card-1)/4)
+					
+				point=points[value];
+				if(point==11) dess++;
+				datorpoäng+=point;
+				if(datorpoäng>21 && dess>0) {
+					datorpoäng-=10;
+					dess--;
+				}
+				showCard(card,point)
+			}
+			
+			//Vem vann
+			var label=document.querySelector("label");
+			if(datorpoäng<22 && datorpoäng>=poäng){
+				label.innerHTML="Datorn vann"
+			} else {
+				label.innerHTML="Du vann"
+			}
+		}
+		function showCard(card,point) {
+			var figure=`<figure><img src=images/${card}.png />
+			<figcaption>${point}</figcaption></figure>`
+			document.querySelector("div").innerHTML+=figure;
+		}
+	</script>
+</body>
+</html>

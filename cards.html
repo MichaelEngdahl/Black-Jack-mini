@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Black Jack</title>
+    <style>
+        *{margin: 0;}
+        figure{display: inline-block; margin: 7px}  
+    </style>
+    <figure></figure>
+</head>
+<body>
+    <button onclick=me()>Nytt kort</button>
+    <button onclick=computer()>Dator</button>
+    <button onclick= location.reload()>Nytt spel</button>
+    <div></div>
+    <main></main>
+    <script>
+        //skapa en array 1-52
+        var cards = Array.from(new Array(52), (x,i) => i+1)//"Array" är en js objekt där "from är en metod
+        console.log(cards);
+        
+        cards.sort((a,b) => 0.5 - Math.random());//Sort skapar inte en ny array utan gör om värdet i tillroppet
+         console.log(cards);
+        var points = ["0","0","2","3","4","5","6","7","8","9","10","10","10","10","11"];
+        
+        showCards()
+        
+        function showCards() {
+            //suits x%4
+            var suits = ["Ruter", "Klöver", "Spader", "Hjärter"]
+            var values = ["","","Två","Tre","Fyra","Fem","Sex","Sju","Åtta","Nio","Tio","Kne","Dro","Ku","Ess"]
+            
+            //hämtar alla bilder 
+            //var s = "<img src = " + "images/" + x + ".png />" //Samma som raden under.
+            var images = cards.map(x => `<figure><img src = images/${x}.png /><figcaption>${suits[x%4]} ${points [14 - Math.floor((x-1) /4)]}</ficaption></figure>`)// ECMA 6
+            //console.log (images)
+            document.querySelector("main").innerHTML = images.join("");// join gör en string av en array"
+            //console.log(images.join(""));
+           
+        }
+
+    </script>
+</body>
+</html>
